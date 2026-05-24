@@ -57,10 +57,10 @@ corrplot(cor(Demographic2[,4:17]))
 
 ```
 ```{r define regions}
-region_1 <- Demographic[Demographic$Geographic_region == 1,]
-region_2 <- Demographic[Demographic$Geographic_region == 2,]
-region_3 <- Demographic[Demographic$Geographic_region == 3,]
-region_4 <- Demographic[Demographic$Geographic_region == 4,]
+region_1 <- Demographic2[Demographic2$Geographic_region == 1,]
+region_2 <- Demographic2[Demographic2$Geographic_region == 2,]
+region_3 <- Demographic2[Demographic2$Geographic_region == 3,]
+region_4 <- Demographic2[Demographic2$Geographic_region == 4,]
 
 n1<-nrow(region_1)
 n2<-nrow(region_2)
