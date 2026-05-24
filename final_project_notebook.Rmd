@@ -3,8 +3,6 @@ title: "project!!!!!"
 output: html_notebook
 ---
 
-
-
 ```{r}
 # RUN THESE ALL ONCE!!! uncomment the code blocks as you go
 #install.packages(c("usethis", "gitcreds"))
