@@ -23,7 +23,7 @@ output: html_notebook
 
 1. Exploratory Analysis and Model Specification
 
-```{r libaries}
+```{r libaries, include=FALSE}
 # make sure to download any you dont have with: install.packages("package_name")
 library(here)
 library(corrplot)
@@ -32,7 +32,7 @@ library(tidyverse)
 
 
 ```{r}
-Demographic <- read.table(here("data", "Demographic.txt")) # more robust read in
+Demographic <- read.table(here("data", "Demographic.txt")) # more robust read-in
 
 # change column names to match correct variables
 colnames(Demographic) <- c('ID','County','state','Land_area','total_population',
@@ -52,7 +52,7 @@ colnames(Demographic2)[10] <- "Log(Y_i)"
 cor(Demographic2[,4:17])
 
 
-# Correlation plot 
+# General correlation plot 
 corrplot(cor(Demographic2[,4:17]))
 
 ```
@@ -66,5 +66,12 @@ n1<-nrow(region_1)
 n2<-nrow(region_2)
 n3<-nrow(region_3)
 n4<-nrow(region_4)
+
+
+regions <- list(region_1, region_2, region_3, region_4)
+
+for (region in regions) {
+  corrplot(cor(region[,4:17])) # corr plot for each region
+}
 ```
 
