@@ -5,17 +5,23 @@ output: html_notebook
 
 ```{r}
 # RUN THESE ALL ONCE!!! uncomment the code blocks as you go
-#install.packages(c("usethis", "gitcreds"))
+install.packages(c("usethis", "gitcreds"))
 
 # then run this:
-#usethis::create_github_token()
+usethis::create_github_token()
+
 # which opens GitHub in your browser, generate a token
 # COPY it before closing the page
 
 # run this and paste token into terminal when prompted
-#gitcreds::gitcreds_set()
+gitcreds::gitcreds_set()
 
 # done! :)
+
+# hi its tarilyn
 ```
+
+
+
 
 
