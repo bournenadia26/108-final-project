@@ -3,8 +3,8 @@ title: "project!!!!!"
 output: html_notebook
 ---
 
-```{r}
-# RUN THESE ALL ONCE!!! uncomment the code blocks as you go
+```{r link cloned repo so you can pull/commit/push}
+# RUN THESE ALL ONCE!!! un-comment the code blocks as you go
 #install.packages(c("usethis", "gitcreds"))
 
 # then run this:
@@ -24,9 +24,10 @@ output: html_notebook
 1. Exploratory Analysis and Model Specification
 
 ```{r libaries}
-# make sure to download any you dont have with: 'install.packages("package_name")'
+# make sure to download any you dont have with: install.packages("package_name")
 library(here)
 library(corrplot)
+library(tidyverse)
 ```
 
 
@@ -38,7 +39,6 @@ colnames(Demographic) <- c('ID','County','state','Land_area','total_population',
                           'Population_18to34','Population_65','Physicians','beds',
                           'Y_i','Graduate_highschool','Graduate_Bachelor','below_poverty',
                           'unemployment','capita_income','personal_income','Geographic_region')
-
 Demographic2 <- Demographic
 
 # Variable names and dimensions of the table
@@ -46,7 +46,7 @@ head(Demographic2)
 names(Demographic2)
 dim(Demographic2)
 
-Demographic2$Y_i <- log(Demographic$Y_i)
+Demographic2$Y_i <- log(Demographic$Y_i) # log transfrom Y
 
 colnames(Demographic2)[10] <- "Log(Y_i)"
 cor(Demographic2[,4:17])
@@ -55,5 +55,16 @@ cor(Demographic2[,4:17])
 # Correlation plot 
 corrplot(cor(Demographic2[,4:17]))
 
+```
+```{r define regions}
+region_1 <- Demographic[Demographic$Geographic_region == 1,]
+region_2 <- Demographic[Demographic$Geographic_region == 2,]
+region_3 <- Demographic[Demographic$Geographic_region == 3,]
+region_4 <- Demographic[Demographic$Geographic_region == 4,]
+
+n1<-nrow(region_1)
+n2<-nrow(region_2)
+n3<-nrow(region_3)
+n4<-nrow(region_4)
 ```
 
