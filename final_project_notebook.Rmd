@@ -21,7 +21,36 @@ gitcreds::gitcreds_set()
 # hi its tarilyn
 ```
 
+1. Exploratory Analysis and Model Specification
+
+```{r}
+# Read in the table 
+Demographic = read.table("/Users/tarilyntong/Desktop/STA108/Demographic.txt")
+
+# change column names to match correct variables
+
+colnames(Demographic) = c('ID','County','state','Land_area','total_population','Population_18to34','Population_65','Phy
+sicians','beds','Y_i','Graduate_highschool','Graduate_Bachelor','below_poverty','unemployment','capita_income','persona
+l_income','Geographic_region')
 
 
+Demographic2 = Demographic
 
+# Variable names and dimensions of the table
+
+head(Demographic2)
+names(Demographic2)
+dim(Demographic2)
+
+Demographic2$Y_i <- log(Demographic$Y_i)
+
+colnames(Demographic2)[10] <- "Log(Y_i)"
+cor(Demographic2[,4:17])
+
+library(corrplot)     # make sure you download "corrplot" package to call the library
+
+# Correlation plot 
+corrplot(cor(Demographic2[,4:17]))
+
+```
 
