@@ -31,7 +31,7 @@ library(tidyverse)
 ```
 
 
-```{r}
+```{r prep}
 Demographic <- read.table(here("data", "Demographic.txt")) # more robust read-in
 
 # change column names to match correct variables
@@ -49,14 +49,7 @@ dim(Demographic2)
 Demographic2$Y_i <- log(Demographic$Y_i) # log transfrom Y
 
 colnames(Demographic2)[10] <- "LogY_i"
-cor(Demographic2[,4:17])
 
-
-# General correlation plot 
-corrplot(cor(Demographic2[,4:17]))
-
-```
-```{r define regions}
 region_1 <- Demographic2[Demographic2$Geographic_region == 1,]
 region_2 <- Demographic2[Demographic2$Geographic_region == 2,]
 region_3 <- Demographic2[Demographic2$Geographic_region == 3,]
@@ -66,12 +59,29 @@ n1<-nrow(region_1)
 n2<-nrow(region_2)
 n3<-nrow(region_3)
 n4<-nrow(region_4)
+```
+```{r corr plots, warning=FALSE}
+# general corr
+cor(Demographic2[,4:17])
+corrplot(cor(Demographic2[,4:17]))
 
-
+# per region corr
 regions <- list(region_1, region_2, region_3, region_4)
+top_list <- list()
 
-for (region in regions) {
-  corrplot(cor(region$LogY_i, region[,4:17])) # corr plot for each region
+for (i in seq_along(regions)) {
+  
+  cat("FOR REGION: ", i, "\n")
+  
+  region <- regions[[i]]
+  cors <- sapply(region[, 4:17], function(x) cor(x, region$LogY_i))
+  ranked <- sort(abs(cors), decreasing = TRUE)
+  
+  top_list[[i]] <- head(ranked, 5)
+  
+  corrplot(cor(region$LogY_i, region[,4:17]))
+  
+  print(top_list[[i]])
 }
 ```
 
