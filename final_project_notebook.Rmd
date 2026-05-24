@@ -48,7 +48,7 @@ dim(Demographic2)
 
 Demographic2$Y_i <- log(Demographic$Y_i) # log transfrom Y
 
-colnames(Demographic2)[10] <- "Log(Y_i)"
+colnames(Demographic2)[10] <- "LogY_i"
 cor(Demographic2[,4:17])
 
 
@@ -71,7 +71,7 @@ n4<-nrow(region_4)
 regions <- list(region_1, region_2, region_3, region_4)
 
 for (region in regions) {
-  corrplot(cor(region[,4:17])) # corr plot for each region
+  corrplot(cor(region$LogY_i, region[,4:17])) # corr plot for each region
 }
 ```
 
