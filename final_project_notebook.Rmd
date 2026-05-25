@@ -46,19 +46,19 @@ head(Demographic2)
 names(Demographic2)
 dim(Demographic2)
 
-Demographic2$Y_i <- log(Demographic$Y_i) # log transfrom Y
+Demographic2$Y_i <- log(Demographic$Y_i) # log transform Y
 
 colnames(Demographic2)[10] <- "LogY_i"
 
-total_pop <- Demographic2[Demographic2$Geographic_region == 1,]
-physicians <- Demographic2[Demographic2$Geographic_region == 2,]
-personal_inc <- Demographic2[Demographic2$Geographic_region == 3,]
-pop_18_34 <- Demographic2[Demographic2$Geographic_region == 4,]
+region1 <- Demographic2[Demographic2$Geographic_region == 1,]
+region2 <- Demographic2[Demographic2$Geographic_region == 2,]
+region3 <- Demographic2[Demographic2$Geographic_region == 3,]
+region4 <- Demographic2[Demographic2$Geographic_region == 4,]
 
-n1<-nrow(total_pop)
-n2<-nrow(physicians)
-n3<-nrow(personal_inc)
-n4<-nrow(pop_18_34)
+n1<-nrow(region1)
+n2<-nrow(region2)
+n3<-nrow(region3)
+n4<-nrow(region4)
 ```
 
 
@@ -68,7 +68,7 @@ cor(Demographic2[,4:17])
 corrplot(cor(Demographic2[,4:17]))
 
 # per region corr
-regions <- list(total_pop, physicians, personal_inc, pop_18_34)
+regions <- list(region1, region2, region3, region4)
 top_list <- list()
 
 for (i in seq_along(regions)) {
