@@ -17,11 +17,7 @@ output: html_notebook
 #gitcreds::gitcreds_set()
 
 # done! :) make sure to re-comment the code blocks
-
-# hi its tarilyn
 ```
-
-1. Exploratory Analysis and Model Specification
 
 ```{r libaries, include=FALSE}
 # make sure to download any you dont have with: install.packages("package_name")
@@ -30,6 +26,7 @@ library(corrplot)
 library(tidyverse)
 ```
 
+# Question 1 : Exploratory Analysis and Model Specification
 
 ```{r prep}
 Demographic <- read.table(here("data", "Demographic.txt")) # more robust read-in
@@ -61,7 +58,6 @@ n2<-nrow(region2)
 n3<-nrow(region3)
 n4<-nrow(region4)
 ```
-
 
 ```{r corr plots, warning=FALSE}
 # general corr
@@ -100,11 +96,47 @@ pairs(cbind(region1$LogY_i, region1$below_poverty, region1$total_population),lab
 
 pairs(cbind(region1$LogY_i, region1$below_poverty, log(region1$total_population)), labels = c("Total serious crimes (log-scale)","Poverty Levels", "Total population (log-scale)"), lwd = 4)
 ```
-CHOSEN PREDICTORS for SLR (no repeats): 
 
-Region 1: Total Population
-Region 2: Physicians
-Region 3: Personal Income
+```{r}
+# Total Population
+region_1 |>
+        ggplot(aes(x = total_population, y = LogY_i)) +
+        geom_point() +
+        theme_bw()
+
+# Physicians
+region_2 |>
+        ggplot(aes(x = Physicians)) +
+        geom_histogram() +
+        theme_bw()
+
+region_2 |>
+        ggplot(aes(x = Physicians, y = LogY_i)) +
+        geom_point() +
+        theme_bw()
+
+# Personal Income
+region_3 |>
+        ggplot(aes(x = personal_income, y = LogY_i)) +
+        geom_point() +
+        theme_bw()
+
+# Population 18-34
+region_4 |>
+        ggplot(aes(x = Population_18to34, y = LogY_i)) +
+        geom_point() +
+        theme_bw()
+```
+
+
+CHOSEN PREDICTORS for SLR (no repeats):
+
+Region 1: Total Population 
+
+Region 2: Physicians 
+
+Region 3: Personal Income 
+
 Region 4: Population 18-34
 
 ```{r SLR models}
@@ -114,7 +146,7 @@ model_3 <- lm(LogY_i ~ personal_income, data = region_3)
 model_4 <- lm(LogY_i ~ Population_18to34, data = region_4)
 ```
 
-# Question 2
+# Question 2 : Model Evaluation
 
 ```{r model stats & CI}
 # REGION 1
@@ -124,16 +156,35 @@ confint(model_1) # 95% CI for both b0 and b1
 
 # REGION 2
 summary(model_2)
-plot(model_2)
+plot(model_2) # insane outlier here
 confint(model_2)
 
 # REGION 3
 summary(model_3)
-plot(model_3)
+plot(model_3) # & here
 confint(model_3)
+
+which.max(hatvalues(model_3))
+Demographic2[3, ]
 
 # REGION 4
 summary(model_4)
 plot(model_4)
 confint(model_4)
+```
+
+[Type assessment here, including analysis of the summary stats & the diagnostic plots]
+
+**REGION 1:** 
+
+**REGION 2:** 
+
+**REGION 3:** 
+
+**REGION 4:** 
+
+# Question 3 : Model Refinement Using Transformations
+
+```{r}
+
 ```
