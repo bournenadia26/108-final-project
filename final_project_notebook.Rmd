@@ -142,16 +142,6 @@ R2 <- SSR / SSTO
 # Residual plots:
 
 plot(
-  X, Y,
-  pch = 19,
-  xlab = "Total Personal Income",
-  ylab = "Total Serious Crimes",
-  main = "Serious Crimes vs. Personal Income"
-)
-
-abline(model_3, col = "red", lwd = 2)
-
-plot(
   Y_hat, e,
   pch = 19,
   xlab = "Fitted Values",
