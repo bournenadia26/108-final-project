@@ -164,9 +164,6 @@ summary(model_3)
 plot(model_3) # & here
 confint(model_3)
 
-which.max(hatvalues(model_3))
-Demographic2[3, ]
-
 # REGION 4
 summary(model_4)
 plot(model_4)
