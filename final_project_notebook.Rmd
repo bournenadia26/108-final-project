@@ -99,4 +99,81 @@ pairs(cbind(region1$LogY_i, region1$below_poverty, region1$total_population),lab
 
 pairs(cbind(region1$LogY_i, region1$below_poverty, log(region1$total_population)), labels = c("Total serious crimes (log-scale)","Poverty Levels", "Total population (log-scale)"), lwd = 4)
 ```
+```{r}
+# Region 3
+# Question 2
 
+Y <- Demographic2$LogY_i[Demographic$Geographic_region == 3]
+X <- Demographic2$personal_income[Demographic$Geographic_region == 3]
+
+model_3 <- lm(Y ~ X, data = region_3)
+
+# Computations:
+
+Y_hat <- fitted(model_3)
+e <- residuals(model_3)
+
+SSE <- sum(e^2)
+MSE <- SSE / (n3 - 2)
+
+X_bar <- mean(X)
+
+s_b0 <- sqrt(MSE * ((1 / n3) + (X_bar)^2 / (sum((X - X_bar)^2))))
+s_b1 <- sqrt(MSE / (sum((X - X_bar)^2)))
+
+b0 <- coef(model_3)[[1]]
+b1 <- coef(model_3)[[2]]
+
+t_val <- qt(0.975, n3 - 2)
+
+b0_lwr <- b0 - t_val * s_b0
+b0_upr <- b0 + t_val * s_b0
+
+b1_lwr <- b1 - t_val * s_b1
+b1_upr <- b1 + t_val * s_b1
+
+Y_bar <- mean(Y)
+
+SSR <- sum((Y_hat - Y_bar)^2)
+SSTO <- sum((Y - Y_bar)^2)
+
+R2 <- SSR / SSTO
+
+# Residual plots:
+
+plot(
+  X, Y,
+  pch = 19,
+  xlab = "Total Personal Income",
+  ylab = "Total Serious Crimes",
+  main = "Serious Crimes vs. Personal Income"
+)
+
+abline(model_3, col = "red", lwd = 2)
+
+plot(
+  Y_hat, e,
+  pch = 19,
+  xlab = "Fitted Values",
+  ylab = "Residuals",
+  main = "Residual Plot Against Fitted Values"
+)
+
+abline(h = 0, col = "blue", lwd = 2)
+
+qqnorm(
+  residuals(model_3),
+  pch = 19,
+)
+
+qqline(residuals(model_3), col = "red", lwd = 2)
+
+# Final values:
+
+b0_lwr
+b0_upr
+
+b1_lwr
+b1_upr
+R2
+```
