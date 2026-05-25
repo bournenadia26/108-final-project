@@ -87,6 +87,7 @@ for (i in seq_along(regions)) {
   print(top_list[[i]])
 }
 ```
+
 ```{r}
 # Region 1
 # log(Y_i) = Beta_0 + Beta_1*total_population
@@ -99,6 +100,22 @@ pairs(cbind(region1$LogY_i, region1$below_poverty, region1$total_population),lab
 
 pairs(cbind(region1$LogY_i, region1$below_poverty, log(region1$total_population)), labels = c("Total serious crimes (log-scale)","Poverty Levels", "Total population (log-scale)"), lwd = 4)
 ```
+CHOSEN PREDICTORS for SLR (no repeats): 
+
+Region 1: Total Population
+Region 2: Physicians
+Region 3: Personal Income
+Region 4: Population 18-34
+
+```{r SLR models}
+model_1 <- lm(LogY_i ~ total_population, data = region_1)
+model_2 <- lm(LogY_i ~ Physicians, data = region_2)
+model_3 <- lm(LogY_i ~ personal_income, data = region_3)
+model_4 <- lm(LogY_i ~ Population_18to34, data = region_4)
+```
+
+
+
 ```{r}
 # Region 3
 # Question 2
