@@ -45,6 +45,7 @@ Demographic2 <- Demographic
 head(Demographic2)
 names(Demographic2)
 dim(Demographic2)
+summary(Demographic2)
 
 Demographic2$Y_i <- log(Demographic$Y_i) # log transform Y
 
@@ -85,5 +86,17 @@ for (i in seq_along(regions)) {
   
   print(top_list[[i]])
 }
+```
+```{r}
+# Region 1
+# log(Y_i) = Beta_0 + Beta_1*total_population
+
+boxplot(cbind(region1$LogY_i,region1$below_poverty, region1$unemployment),names = c("Total serious crimes (log-scale)", "Poverty Levels", "Percent Unemployment"))
+
+pairs(cbind(region1$LogY_i, region1$below_poverty, region1$total_population), labels = c("Total serious crimes", "Poverty Level", "Total population"), lwd = 4)
+
+pairs(cbind(region1$LogY_i, region1$below_poverty, region1$total_population),labels=c("Total serious crimes  (log-scale)","Poverty level ", "Poverty Levels", "Total Population"), lwd=4)
+
+pairs(cbind(region1$LogY_i, region1$below_poverty, log(region1$total_population)), labels = c("Total serious crimes (log-scale)","Poverty Levels", "Total population (log-scale)"), lwd = 4)
 ```
 
