@@ -204,5 +204,18 @@ We are 95% confident the intercept is between [3.75, 7.57] and that for each one
 # Question 3 : Model Refinement Using Transformations
 
 ```{r}
+# REGION 1
+
+# REGION 2
+
+# REGION 3
+model_3b <- lm(log(Demographic$Y_i) ~ log(Demographic2$personal_income), data = region_3)
+
+anova(model_3b)
+summary(model_3b)
+plot(model_3b) # more homoscedastic residuals
+confint(model_3b)
+
+# REGION 4
 
 ```
