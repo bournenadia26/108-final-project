@@ -179,7 +179,7 @@ We are 95% confident the intercept is between [8.09, 8.40] and that for each one
 
 **REGION 2**
 
-For Region 2, we fit a simple linear regression of log(total serious crimes) on the number of professionally active non-federal physicians. The estimated slope is 8.861 (p = 7.134e-15 or \~0), suggesting a positive and significant relationship. The model explains 43.14% of the variation in log(serious crimes).
+For Region 2, we fit a simple linear regression of log(total serious crimes) on the number of professionally active non-federal physicians. The estimated slope is 0.0004375 (p = 7.134e-15 or \~0), suggesting a positive and significant relationship. The model explains 43.14% of the variation in log(serious crimes).
 
 The residual plots show extreme fanning suggesting heteroscedasticity again. Points veer away from the ends of the Q-Q plot line, so residuals are not entirely normally distributed. There is an extremely influential outlier (point 2) pointed out in the Residuals v. Leverage plot that greatly exceeds Cook's distance and is likely pulling hard on the regression line. Assumptions are not reasonably met.
 
@@ -191,7 +191,7 @@ For Region 3, we fit a simple linear regression of log(total serious crimes) on 
 
 Once again, residual plots show extreme fanning suggesting heteroscedasticity. Points veer only slightly away from Q-Q plot, residuals appear approximately normally distributed. Again, there is an extremely influential outlier (point 3) that greatly exceeds Cook's distance. Assumptions are not reasonably met.
 
-We are 95% confident the intercept is between [8.93, 9.17] and that for each one unit increase in personal income, log(Y) increases by between [0.0000885, 0.0001]. Notably, the CI for beta_1 does not include 0, which is evidence the predictor is significant.
+We are 95% confident the intercept is between [8.93, 9.17] and that for each one unit increase in personal income, log(Y) increases by between [0.000088, 0.00011]. Notably, the CI for beta_1 does not include 0, which is evidence the predictor is significant.
 
 **REGION 4**
 
