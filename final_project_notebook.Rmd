@@ -84,19 +84,56 @@ for (i in seq_along(regions)) {
 }
 ```
 
+## Region 1
+
+```{r}
+# log(Y_i) = Beta_0 + Beta_1*total_population
+
+boxplot(cbind(region1$LogY_i, region1$total_population),names = c("Total serious crimes (log-scale)", "Total Population"))
+
+pairs(cbind(region1$LogY_i, region1$total_population),labels=c("Total serious crimes  (log-scale)", "Total Population"), lwd=4)
+
+pairs(cbind(region1$LogY_i, log(region1$total_population)), labels = c("Total serious crimes (log-scale)", "Total population (log-scale)"), lwd = 4)
+```
+
+## Region 2
+
+```{r}
+# log(Y_i) = Beta_0 + Beta_1*total_population
+
+boxplot(cbind(region1$LogY_i, region1$Physicians),names = c("Total serious crimes (log-scale)", "Physicians"))
+
+pairs(cbind(region1$LogY_i, region1$Physicians),labels=c("Total serious crimes  (log-scale)", "Physicians"), lwd=4)
+
+pairs(cbind(region1$LogY_i, log(region1$Physicians)), labels = c("Total serious crimes (log-scale)", "Physicians (log-scale)"), lwd = 4)
+```
+
+
+## Region 3
+
+```{r}
+# log(Y_i) = Beta_0 + Beta_1*total_population
+
+boxplot(cbind(region1$LogY_i, region1$personal_income),names = c("Total serious crimes (log-scale)", "Personal Income"))
+
+pairs(cbind(region1$LogY_i, region1$personal_income),labels=c("Total serious crimes  (log-scale)", "Personal Income"), lwd=4)
+
+pairs(cbind(region1$LogY_i, log(region1$personal_income)), labels = c("Total serious crimes (log-scale)", "Personal Income (log-scale)"), lwd = 4)
+```
+
+
+## Region 4
+
 ```{r}
 # Region 1
 # log(Y_i) = Beta_0 + Beta_1*total_population
 
-boxplot(cbind(region1$LogY_i,region1$below_poverty, region1$unemployment),names = c("Total serious crimes (log-scale)", "Poverty Levels", "Percent Unemployment"))
+boxplot(cbind(region1$LogY_i, region1$Population_18to34),names = c("Total serious crimes (log-scale)", "Population (Age 18-34)"))
 
-pairs(cbind(region1$LogY_i, region1$below_poverty, region1$total_population), labels = c("Total serious crimes", "Poverty Level", "Total population"), lwd = 4)
+pairs(cbind(region1$LogY_i, region1$Population_18to34),labels=c("Total serious crimes  (log-scale)", "Population (Age 18-34)"), lwd=4)
 
-pairs(cbind(region1$LogY_i, region1$below_poverty, region1$total_population),labels=c("Total serious crimes  (log-scale)","Poverty level ", "Poverty Levels", "Total Population"), lwd=4)
-
-pairs(cbind(region1$LogY_i, region1$below_poverty, log(region1$total_population)), labels = c("Total serious crimes (log-scale)","Poverty Levels", "Total population (log-scale)"), lwd = 4)
+pairs(cbind(region1$LogY_i, log(region1$Population_18to34)), labels = c("Total serious crimes (log-scale)", "Population (Age 18-34) (log-scale)"), lwd = 4)
 ```
-
 ```{r}
 # Total Population
 region1 |>
@@ -234,8 +271,4 @@ anova(model_4b)
 summary(model_4b)
 plot(model_4b)
 confint(model_4b)
-<<<<<<< HEAD
 ```
-=======
-```
->>>>>>> 203e08f101eb68aa9c52898f7cbbcdc5605219f0
