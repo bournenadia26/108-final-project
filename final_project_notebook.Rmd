@@ -128,14 +128,13 @@ region_4 |>
         theme_bw()
 ```
 
-
 CHOSEN PREDICTORS for SLR (no repeats):
 
-Region 1: Total Population 
+Region 1: Total Population
 
-Region 2: Physicians 
+Region 2: Physicians
 
-Region 3: Personal Income 
+Region 3: Personal Income
 
 Region 4: Population 18-34
 
@@ -170,15 +169,39 @@ plot(model_4)
 confint(model_4)
 ```
 
-[Type assessment here, including analysis of the summary stats & the diagnostic plots]
+GENERIC TEXT TO REUSE: For Region [X], we fit a simple linear regression of log(total serious crimes) on [predictor]. The estimated slope is [β₁] (p = ...), suggesting a [positive/negative] and [significant/not significant] relationship. The model explains [R²]% of the variation in log(serious crimes). 
 
-**REGION 1:** 
+**REGION 1**
 
-**REGION 2:** 
+For Region 1, we fit a simple linear regression of log(total serious crimes) on the total population. The estimated slope is 0.000002526 (p = \~0), suggesting a positive relationship. The number is small despite the relationship being strong because total population is very large. The model explains 74.15% of the variation in log(serious crimes). 
 
-**REGION 3:** 
+Diagnostic plots show severe fanning of residuals, which is a sign of heteroscedasticity. Q-Q looks good, residuals appear approximately normally distributed. There are multiple influential points pointed out in the Residuals v. Leverage plot (points 6, 11, & 16). 
 
-**REGION 4:** 
+We are 95% confident the intercept is between [8.09, 8.40] and that for each one unit increase in total population, log(Y) increases by between [0.0000022, 0.0000028]. Notably, the CI for beta_1 does not include 0, which is evidence the predictor is significant.
+
+**REGION 2**
+
+Summary statistics:
+
+Diagnostic plots:
+
+CI Interpretation: We are 95% confident the intercept is between [lwr, upr] and that for each one unit increase in physicians, log(Y) increases by between [, ].
+
+**REGION 3**
+
+Summary statistics:
+
+Diagnostic plots:
+
+CI Interpretation: We are 95% confident the intercept is between [lwr, upr] and that for each one unit increase in personal income, log(Y) increases by between [, ].
+
+**REGION 4**
+
+Summary statistics:
+
+Diagnostic plots:
+
+CI Interpretation: We are 95% confident the intercept is between [lwr, upr] and that for each one unit increase in total population of 18-34 year olds, log(Y) increases by between [, ].
 
 # Question 3 : Model Refinement Using Transformations
 
