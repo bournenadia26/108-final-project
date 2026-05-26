@@ -173,19 +173,19 @@ GENERIC TEXT TO REUSE: For Region [X], we fit a simple linear regression of log(
 
 **REGION 1**
 
-For Region 1, we fit a simple linear regression of log(total serious crimes) on the total population. The estimated slope is 0.000002526 (p = \~0), suggesting a positive relationship. The number is small despite the relationship being strong because total population is very large. The model explains 74.15% of the variation in log(serious crimes). 
+For Region 1, we fit a simple linear regression of log(total serious crimes) on the total population. The estimated slope is 0.000002526 (p = < 2.2e-16 or \~0), suggesting a positive and significant relationship. The number is small despite the relationship being strong because total population is very large. The model explains 74.15% of the variation in log(serious crimes). 
 
-Diagnostic plots show severe fanning of residuals, which is a sign of heteroscedasticity. Q-Q looks good, residuals appear approximately normally distributed. There are multiple influential points pointed out in the Residuals v. Leverage plot (points 6, 11, & 16). 
+The residual plots show a fanning pattern suggesting non-constant variance \(heteroscedasticity\), which motivates the transformation approach explored in Question 3. Q-Q looks good, residuals appear approximately normally distributed. There are multiple influential points pointed out in the Residuals v. Leverage plot (points 6, 11, & 16). 
 
 We are 95% confident the intercept is between [8.09, 8.40] and that for each one unit increase in total population, log(Y) increases by between [0.0000022, 0.0000028]. Notably, the CI for beta_1 does not include 0, which is evidence the predictor is significant.
 
 **REGION 2**
 
-Summary statistics:
+For Region 2, we fit a simple linear regression of log(total serious crimes) on the number of physicians. The estimated slope is 8.861 (p = 7.134e-15 or \~0), suggesting a positive and significant relationship. The model explains 43.14% of the variation in log(serious crimes). 
 
-Diagnostic plots:
+The residual plots show extreme fanning suggesting heteroscedasticity again. Points veer away from the ends of the Q-Q plot line, so residuals are not entirely normally distributed. There is an extremely influential outlier (point 2) pointed out in the Residuals v. Leverage plot that greatly exceeds Cook's distance.
 
-CI Interpretation: We are 95% confident the intercept is between [lwr, upr] and that for each one unit increase in physicians, log(Y) increases by between [, ].
+We are 95% confident the intercept is between [8.67, 9.04] and that for each physician, log(Y) increases by between [0.0003, 0.0005]. Notably, the CI for beta_1 does not include 0, which is evidence the predictor is significant.
 
 **REGION 3**
 
