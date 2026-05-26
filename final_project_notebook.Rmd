@@ -83,57 +83,19 @@ for (i in seq_along(regions)) {
   print(top_list[[i]])
 }
 ```
-## Region 1
-
-```{r}
-# log(Y_i) = Beta_0 + Beta_1*total_population
-
-boxplot(cbind(region1$LogY_i, region1$total_population),names = c("Total serious crimes (log-scale)", "Total Population"))
-
-pairs(cbind(region1$LogY_i, region1$total_population),labels=c("Total serious crimes  (log-scale)", "Total Population"), lwd=4)
-
-pairs(cbind(region1$LogY_i, log(region1$total_population)), labels = c("Total serious crimes (log-scale)", "Total population (log-scale)"), lwd = 4)
-```
-
-## Region 2
-
-```{r}
-# log(Y_i) = Beta_0 + Beta_1*total_population
-
-boxplot(cbind(region1$LogY_i, region1$Physicians),names = c("Total serious crimes (log-scale)", "Physicians"))
-
-pairs(cbind(region1$LogY_i, region1$Physicians),labels=c("Total serious crimes  (log-scale)", "Physicians"), lwd=4)
-
-pairs(cbind(region1$LogY_i, log(region1$Physicians)), labels = c("Total serious crimes (log-scale)", "Physicians (log-scale)"), lwd = 4)
-```
-
-
-## Region 3
-
-```{r}
-# log(Y_i) = Beta_0 + Beta_1*total_population
-
-boxplot(cbind(region1$LogY_i, region1$personal_income),names = c("Total serious crimes (log-scale)", "Personal Income"))
-
-pairs(cbind(region1$LogY_i, region1$personal_income),labels=c("Total serious crimes  (log-scale)", "Personal Income"), lwd=4)
-
-pairs(cbind(region1$LogY_i, log(region1$personal_income)), labels = c("Total serious crimes (log-scale)", "Personal Income (log-scale)"), lwd = 4)
-```
-
-
-## Region 4
 
 ```{r}
 # Region 1
 # log(Y_i) = Beta_0 + Beta_1*total_population
 
-boxplot(cbind(region1$LogY_i, region1$Population_18to34),names = c("Total serious crimes (log-scale)", "Population (Age 18-34)"))
+boxplot(cbind(region1$LogY_i,region1$below_poverty, region1$unemployment),names = c("Total serious crimes (log-scale)", "Poverty Levels", "Percent Unemployment"))
 
-pairs(cbind(region1$LogY_i, region1$Population_18to34),labels=c("Total serious crimes  (log-scale)", "Population (Age 18-34)"), lwd=4)
+pairs(cbind(region1$LogY_i, region1$below_poverty, region1$total_population), labels = c("Total serious crimes", "Poverty Level", "Total population"), lwd = 4)
 
-pairs(cbind(region1$LogY_i, log(region1$Population_18to34)), labels = c("Total serious crimes (log-scale)", "Population (Age 18-34) (log-scale)"), lwd = 4)
+pairs(cbind(region1$LogY_i, region1$below_poverty, region1$total_population),labels=c("Total serious crimes  (log-scale)","Poverty level ", "Poverty Levels", "Total Population"), lwd=4)
+
+pairs(cbind(region1$LogY_i, region1$below_poverty, log(region1$total_population)), labels = c("Total serious crimes (log-scale)","Poverty Levels", "Total population (log-scale)"), lwd = 4)
 ```
-
 
 ```{r}
 # Total Population
@@ -217,7 +179,7 @@ We are 95% confident the intercept is between [8.09, 8.40] and that for each one
 
 **REGION 2**
 
-For Region 2, we fit a simple linear regression of log(total serious crimes) on the number of professionally active non-federal physicians. The estimated slope is 8.861 (p = 7.134e-15 or \~0), suggesting a positive and significant relationship. The model explains 43.14% of the variation in log(serious crimes).
+For Region 2, we fit a simple linear regression of log(total serious crimes) on the number of professionally active non-federal physicians. The estimated slope is 0.0004375 (p = 7.134e-15 or \~0), suggesting a positive and significant relationship. The model explains 43.14% of the variation in log(serious crimes).
 
 The residual plots show extreme fanning suggesting heteroscedasticity again. Points veer away from the ends of the Q-Q plot line, so residuals are not entirely normally distributed. There is an extremely influential outlier (point 2) pointed out in the Residuals v. Leverage plot that greatly exceeds Cook's distance and is likely pulling hard on the regression line. Assumptions are not reasonably met.
 
@@ -229,7 +191,7 @@ For Region 3, we fit a simple linear regression of log(total serious crimes) on 
 
 Once again, residual plots show extreme fanning suggesting heteroscedasticity. Points veer only slightly away from Q-Q plot, residuals appear approximately normally distributed. Again, there is an extremely influential outlier (point 3) that greatly exceeds Cook's distance. Assumptions are not reasonably met.
 
-We are 95% confident the intercept is between [8.93, 9.17] and that for each one unit increase in personal income, log(Y) increases by between [0.0000885, 0.0001]. Notably, the CI for beta_1 does not include 0, which is evidence the predictor is significant.
+We are 95% confident the intercept is between [8.93, 9.17] and that for each one unit increase in personal income, log(Y) increases by between [0.000088, 0.00011]. Notably, the CI for beta_1 does not include 0, which is evidence the predictor is significant.
 
 **REGION 4**
 
@@ -242,5 +204,34 @@ We are 95% confident the intercept is between [3.75, 7.57] and that for each one
 # Question 3 : Model Refinement Using Transformations
 
 ```{r}
+# REGION 1
+model_1b <- lm(log(Demographic$Y_i) ~ log(Demographic$total_population), data = region1)
 
+anova(model_1b)
+summary(model_1b)
+plot(model_1b) # greatly improved linearity
+confint(model_1b)
+
+# REGION 2
+model_2b <- lm(log(Demographic$Y_i) ~ log(Demographic$Physicians), data=region2)
+
+anova(model_2b)
+summary(model_2b)
+plot(model_2b)
+confint(model_2b)
+# REGION 3
+model_3b <- lm(log(Demographic$Y_i) ~ log(Demographic$personal_income), data = region3)
+
+anova(model_3b)
+summary(model_3b)
+plot(model_3b) # greatly improved linearity, previous outliers arent as bad now
+confint(model_3b)
+
+# REGION 4
+model_4b <- lm(log(Demographic$Y_i) ~ log(Demographic$Population_18to34), data = region4)
+
+anova(model_4b)
+summary(model_4b)
+plot(model_4b)
+confint(model_4b)
 ```
