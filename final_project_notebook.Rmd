@@ -209,7 +209,7 @@ model_1b <- lm(log(Demographic$Y_i) ~ log(Demographic$total_population), data = 
 
 anova(model_1b)
 summary(model_1b)
-plot(model_1b) # more homoscedastic residuals
+plot(model_1b) # greatly improved linearity
 confint(model_1b)
 
 # REGION 2
@@ -219,7 +219,7 @@ model_3b <- lm(log(Demographic$Y_i) ~ log(Demographic$personal_income), data = r
 
 anova(model_3b)
 summary(model_3b)
-plot(model_3b) # more homoscedastic residuals
+plot(model_3b) # greatly improved linearity, previous outliers arent as bad now
 confint(model_3b)
 
 # REGION 4
