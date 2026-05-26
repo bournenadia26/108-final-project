@@ -213,7 +213,12 @@ plot(model_1b) # greatly improved linearity
 confint(model_1b)
 
 # REGION 2
+model_2b <- lm(log(Demographics$Y_i) ~ log(Demographic$Physicians), data=region2)
 
+anova(model_2b)
+summary(model_2b)
+plot(model_2b)
+confint(model_2b)
 # REGION 3
 model_3b <- lm(log(Demographic$Y_i) ~ log(Demographic$personal_income), data = region3)
 
@@ -223,5 +228,10 @@ plot(model_3b) # greatly improved linearity, previous outliers arent as bad now
 confint(model_3b)
 
 # REGION 4
+model_4b <- lm(log(Demographics$Y_i) ~ log(Demographics$population_18to34), data = region4)
 
+anova(model_4b)
+summary(model_4b)
+plot(model_4b)
+confint(model_4b)
 ```
