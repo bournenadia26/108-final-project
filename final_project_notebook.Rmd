@@ -234,4 +234,8 @@ anova(model_4b)
 summary(model_4b)
 plot(model_4b)
 confint(model_4b)
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> 203e08f101eb68aa9c52898f7cbbcdc5605219f0
