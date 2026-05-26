@@ -205,11 +205,17 @@ We are 95% confident the intercept is between [3.75, 7.57] and that for each one
 
 ```{r}
 # REGION 1
+model_1b <- lm(log(Demographic$Y_i) ~ log(Demographic$total_population), data = region1)
+
+anova(model_1b)
+summary(model_1b)
+plot(model_1b) # more homoscedastic residuals
+confint(model_1b)
 
 # REGION 2
 
 # REGION 3
-model_3b <- lm(log(Demographic$Y_i) ~ log(Demographic2$personal_income), data = region3)
+model_3b <- lm(log(Demographic$Y_i) ~ log(Demographic$personal_income), data = region3)
 
 anova(model_3b)
 summary(model_3b)
