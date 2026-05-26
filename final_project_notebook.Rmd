@@ -209,7 +209,7 @@ We are 95% confident the intercept is between [3.75, 7.57] and that for each one
 # REGION 2
 
 # REGION 3
-model_3b <- lm(log(Demographic$Y_i) ~ log(Demographic2$personal_income), data = region_3)
+model_3b <- lm(log(Demographic$Y_i) ~ log(Demographic2$personal_income), data = region3)
 
 anova(model_3b)
 summary(model_3b)
