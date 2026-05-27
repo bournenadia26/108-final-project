@@ -102,11 +102,14 @@ Region 1 consists of total population as the predictor. A boxplot was created an
 ```{r}
 # log(Y_i) = Beta_0 + Beta_1*total_population
 
-boxplot(cbind(region1$LogY_i, region1$total_population),names = c("Total serious crimes (log-scale)", "Total Population"))
+boxplot(cbind(region1$LogY_i, region1$total_population),names = c("Total 
+                                                                  serious crimes (log-scale)", "Total Population"))
 
-pairs(cbind(region1$LogY_i, region1$total_population),labels=c("Total serious crimes  (log-scale)", "Total Population"), lwd=4)
+pairs(cbind(region1$LogY_i, region1$total_population),labels = c("Total 
+                                                               serious crimes (log-scale)", "Total Population"), lwd=4)
 
-pairs(cbind(region1$LogY_i, log(region1$total_population)), labels = c("Total serious crimes (log-scale)", "Total population (log-scale)"), lwd = 4)
+pairs(cbind(region1$LogY_i, log(region1$total_population)), labels = c("Total 
+                                                                       serious crimes (log-scale)", "Total population (log-scale)"), lwd = 4)
 ```
 Here we can see that when comparing the two scatter plots, the transformed predictor (total population) has reduced skewness and produces a more consistent linear trend.
 
@@ -115,11 +118,14 @@ Here we can see that when comparing the two scatter plots, the transformed predi
 ```{r}
 # log(Y_i) = Beta_0 + Beta_1*total_population
 
-boxplot(cbind(region1$LogY_i, region1$Physicians),names = c("Total serious crimes (log-scale)", "Physicians"))
+boxplot(cbind(region1$LogY_i, region1$Physicians),names = c("Total serious 
+      crimes (log-scale)", "Physicians"))
 
-pairs(cbind(region1$LogY_i, region1$Physicians),labels=c("Total serious crimes  (log-scale)", "Physicians"), lwd=4)
+pairs(cbind(region1$LogY_i, region1$Physicians),labels=c("Total serious crimes 
+      (log-scale)", "Physicians"), lwd=4)
 
-pairs(cbind(region1$LogY_i, log(region1$Physicians)), labels = c("Total serious crimes (log-scale)", "Physicians (log-scale)"), lwd = 4)
+pairs(cbind(region1$LogY_i, log(region1$Physicians)), labels = c("Total serious 
+      crimes (log-scale)", "Physicians (log-scale)"), lwd = 4)
 ```
 
 Region 2 displays the number of physicians as a predictor variable. The plots indicate that the counties with higher numbers of physicians generally have higher levels of crime after transformation. This transformed relationship appears more linear and less influenced by extreme observations.
@@ -133,7 +139,7 @@ Personal income was chosen as the predictor variable. The boxplot shows variatio
 
 boxplot(cbind(region1$LogY_i, region1$personal_income),names = c("Total serious crimes (log-scale)", "Personal Income"))
 
-pairs(cbind(region1$LogY_i, region1$personal_income),labels=c("Total serious crimes  (log-scale)", "Personal Income"), lwd=4)
+pairs(cbind(region1$LogY_i, region1$personal_income),labels = c("Total serious crimes  (log-scale)", "Personal Income"), lwd=4)
 
 pairs(cbind(region1$LogY_i, log(region1$personal_income)), labels = c("Total serious crimes (log-scale)", "Personal Income (log-scale)"), lwd = 4)
 ```
