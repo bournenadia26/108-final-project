@@ -7,7 +7,7 @@ output:
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(fig.width = 8, fig.height = 6)
+knitr::opts_chunk$set(fig.width = 5, fig.height = 5)
 ```
 
 
@@ -161,38 +161,6 @@ pairs(cbind(region1$LogY_i, region1$Population_18to34),labels=c("Total serious c
 pairs(cbind(region1$LogY_i, log(region1$Population_18to34)), labels = c("Total serious crimes (log-scale)", "Population (Age 18-34) (log-scale)"), lwd = 4)
 ```
 
-These scatter plots below examine the distribution of predictors, relationship between predictors and the response variable, and the possible trends. Scatter plots also can help assume whether linearity is reasonable. For example, within model 1, containing total population shows that counties with larger populations tend to have higher crime levels. This helps determine whether a positive relationship exists and if it is linear, making total population a good predictor for region 1. Models 2, 3, and 4 together support our selection of predictors and also provides sufficient evidence for assessing linear regression and identifying outliers.
-
-```{r}
-# Total Population
-region1 |>
-        ggplot(aes(x = total_population, y = LogY_i)) +
-        geom_point() +
-        theme_bw()+ labs(title = "Model 1")
-
-# Physicians
-region2 |>
-        ggplot(aes(x = Physicians)) +
-        geom_histogram() +
-        theme_bw() + labs(title = "Model 2")
-
-region2 |>
-        ggplot(aes(x = Physicians, y = LogY_i)) +
-        geom_point() +
-        theme_bw() + labs(title = "Model 2")
-
-# Personal Income
-region3 |>
-        ggplot(aes(x = personal_income, y = LogY_i)) +
-        geom_point() +
-        theme_bw() +labs(title = "Model 3")
-
-# Population 18-34
-region4 |>
-        ggplot(aes(x = Population_18to34, y = LogY_i)) +
-        geom_point() +
-        theme_bw() +labs(title = "Model 4")
-```
 
 ### CHOSEN PREDICTORS for SLR (no repeats):
 
