@@ -1,7 +1,13 @@
 ---
 title: "project!!!!!"
-output: html_notebook
+output:
+  pdf_document: default
+  html_notebook: default
 ---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
 
 ```{r link cloned repo so you can pull/commit/push}
 # RUN THESE ALL ONCE!!! un-comment the code blocks as you go
@@ -27,6 +33,10 @@ library(tidyverse)
 ```
 
 # Question 1 : Exploratory Analysis and Model Specification
+
+The Demographic data set was first explored using descriptive statistics and correlation analyses in order to understand the relationships between crime rates and demographic variables across four regions. The data set was split into four regions, region 1 containing 103 observations, region 2 containing 108 observations, region 3 containing 152 observations and region 4 containing 77 observations. Summary statistics were used to explore and evaluate the ranges, distributions, and variability  of the demographic and socioeconomic variables.
+
+The correlation matrices and plots were used to examine the relationships between the variables. If a variable contained a stronger correlation to the response variable, they were selected as potential predictors for the regional regression models. Separate analyses was done for each region to determine whether different predictors were associated with crime rates. This analysis suggested that different demographic variables were more strongly associated with crime depending on the region. In this project, we selected total population, the number of physicians, personal income, and population of ages 18 to 34.
 
 ```{r prep}
 Demographic <- read.table(here("data", "Demographic.txt")) # more robust read-in
@@ -86,6 +96,8 @@ for (i in seq_along(regions)) {
 
 ## Region 1
 
+Region 1 consists of total population as the predictor. A boxplot was created and indicated variability within county population size, while the scatter plots suggest that there is a positive relationship between total population and the log-transformed response variability, crime rates. The additional scatter plot displays the log-transformed total population and indicates whether there is improved linearity of the relationship.
+
 ```{r}
 # log(Y_i) = Beta_0 + Beta_1*total_population
 
@@ -95,6 +107,7 @@ pairs(cbind(region1$LogY_i, region1$total_population),labels=c("Total serious cr
 
 pairs(cbind(region1$LogY_i, log(region1$total_population)), labels = c("Total serious crimes (log-scale)", "Total population (log-scale)"), lwd = 4)
 ```
+Here we can see that when comparing the two scatter plots, the transformed predictor (total population) has reduced skewness and produces a more consistent linear trend.
 
 ## Region 2
 
@@ -108,8 +121,11 @@ pairs(cbind(region1$LogY_i, region1$Physicians),labels=c("Total serious crimes  
 pairs(cbind(region1$LogY_i, log(region1$Physicians)), labels = c("Total serious crimes (log-scale)", "Physicians (log-scale)"), lwd = 4)
 ```
 
+Region 2 displays the number of physicians as a predictor variable. The plots indicate that the counties with higher numbers of physicians generally have higher levels of crime after transformation. This transformed relationship appears more linear and less influenced by extreme observations.
 
 ## Region 3
+
+Personal income was chosen as the predictor variable. The boxplot shows variation in income levels across counties, and the scatter-plots suggested an association between personal income and the transformed crime variable. The logged transformation of personal income was evaluated to determine whether it improved the distributional properties and linear relationship with the response variable.
 
 ```{r}
 # log(Y_i) = Beta_0 + Beta_1*total_population
@@ -124,6 +140,8 @@ pairs(cbind(region1$LogY_i, log(region1$personal_income)), labels = c("Total ser
 
 ## Region 4
 
+For Region 4, the population between the ages of 18 and 34 was selected as the predictor variable. The exploratory analysis suggested a positive association between the younger adult population and the transformed crime variable. Additional scatter-plots using the log of the predictor were used to assess whether the transformation improved linearity and reduced the effect of skewness.
+
 ```{r}
 # Region 1
 # log(Y_i) = Beta_0 + Beta_1*total_population
@@ -134,46 +152,49 @@ pairs(cbind(region1$LogY_i, region1$Population_18to34),labels=c("Total serious c
 
 pairs(cbind(region1$LogY_i, log(region1$Population_18to34)), labels = c("Total serious crimes (log-scale)", "Population (Age 18-34) (log-scale)"), lwd = 4)
 ```
+
+These scatter plots below examine the distribution of predictors, relationship between predictors and the response variable, and the possible trends. Scatter plots also can help assume whether linearity is reasonable. For example, within model 1, containing total population shows that counties with larger populations tend to have higher crime levels. This helps determine whether a positive relationship exists and if it is linear, making total population a good predictor for region 1. Models 2, 3, and 4 together support our selection of predictors and also provides sufficient evidence for assessing linear regression and identifying outliers.
+
 ```{r}
 # Total Population
 region1 |>
         ggplot(aes(x = total_population, y = LogY_i)) +
         geom_point() +
-        theme_bw()
+        theme_bw()+ labs(title = "Model 1")
 
 # Physicians
 region2 |>
         ggplot(aes(x = Physicians)) +
         geom_histogram() +
-        theme_bw()
+        theme_bw() + labs(title = "Model 2")
 
 region2 |>
         ggplot(aes(x = Physicians, y = LogY_i)) +
         geom_point() +
-        theme_bw()
+        theme_bw() + labs(title = "Model 2")
 
 # Personal Income
 region3 |>
         ggplot(aes(x = personal_income, y = LogY_i)) +
         geom_point() +
-        theme_bw()
+        theme_bw() +labs(title = "Model 3")
 
 # Population 18-34
 region4 |>
         ggplot(aes(x = Population_18to34, y = LogY_i)) +
         geom_point() +
-        theme_bw()
+        theme_bw() +labs(title = "Model 4")
 ```
 
-CHOSEN PREDICTORS for SLR (no repeats):
+### CHOSEN PREDICTORS for SLR (no repeats):
 
-Region 1: Total Population
+- Region 1: Total Population
 
-Region 2: Physicians
+- Region 2: Physicians
 
-Region 3: Personal Income
+- Region 3: Personal Income
 
-Region 4: Population 18-34
+- Region 4: Population 18-34
 
 ```{r SLR models}
 model_1 <- lm(LogY_i ~ total_population, data = region1)
