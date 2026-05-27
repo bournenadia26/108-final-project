@@ -1,5 +1,6 @@
 ---
-title: "project!!!!!"
+title: "STA 108 Final Project"
+author: "Jachin Lee, Jacob Melendrez, Nadia Bourne, Olivia Ma, and Tarilyn Tong"
 output:
   pdf_document: default
   html_notebook: default
