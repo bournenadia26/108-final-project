@@ -296,3 +296,34 @@ We are 95% confident the intercept is between [0.242, 1.23] and that for each on
 
 **REGION 4**
 For Region 4, we applied the log transformation to the original model, the slope of the model is approximately 1.343 (p = 2.26e^-04), suggesting a positive and significant relationship. The p-value for the transformed model is larger than the original model (p = 3.25e^-05) but both models indicate the predictor variable being significant. The transformed CI [0.633, 2.053] is much larger than the original model CI [0.082, 0.21], this indicates that the transformed model may not be a better model than the original. When looking at both the Residuals vs. Fitted and Q-Q plots we can see that both the original and transformed models are very similar with slight variation but by looking at each plot we can see homoscedasticity and the residuals being normally distributed. So the transformed model did not explicitly improve the fit of the data compared to the original. Looking at the R^2 values, original (R^2 = 0.1963) and transformed (R^2 = 0.0284), we can see that the transformed model is worse at explaining the variation being caused by the predictor variable which is Population 18 to 34. Based off the values and plots, we will not choose the log transformated model to represent region 4 but stick with the origianl as the log transformation did not imorove the models ability to explain the relationship between total number of crimes and Population 18 to 34. 
+
+```{r}
+# Total Population
+region1 |>
+        ggplot(aes(x = log(total_population), y = LogY_i)) +
+        geom_point() +
+        theme_bw()
+
+# Physicians
+region2 |>
+        ggplot(aes(x = log(Physicians))) +
+        geom_histogram() +
+        theme_bw()
+
+region2 |>
+        ggplot(aes(x = log(Physicians), y = LogY_i)) +
+        geom_point() +
+        theme_bw()
+
+# Personal Income
+region3 |>
+        ggplot(aes(x = log(personal_income), y = LogY_i)) +
+        geom_point() +
+        theme_bw()
+
+# Population 18-34
+region4 |>
+        ggplot(aes(x = log(Population_18to34), y = LogY_i)) +
+        geom_point() +
+        theme_bw()
+```
