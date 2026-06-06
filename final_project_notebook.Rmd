@@ -332,19 +332,23 @@ region4 |>
 ```{r}
 # Setting up data and choosing a region
 
-nrow(region3)
-head(region3)
+nrow(region4)
+head(region4)
 
-pairs(region3[,5:12], lwd=2)
-cor(region3[,5:12])
+pairs(region4[,5:12], lwd=2)
+cor(region4[,5:12])
 ```
 ```{r}
 # Model 1
 
-new.data <- cbind(log(region3[,10]), region3[,9], region1[,5])
+data <- read.table("Demographic.txt")
+
+region4_data <- subset(data, data[,17] == 4)
+
+new.data <- cbind(log(region4_data[,10]), region4_data[,6], region4_data[,5], region4_data[,8], region4_data[,16])
 new.data <-as.data.frame(new.data)
 
-colnames(new.data) <- c("log_Total_crimes", "Personal_Income", "Total_Population")
+colnames(new.data) <- c("log_Total_Crimes", "Population_18_to_34", "Total_Population", "Number_of_Physicians", "Personal_Income")
 
 pairs(new.data ,lwd=3)
 head(new.data )
@@ -356,9 +360,9 @@ library(corrplot)
 corrplot(cor(new.data[-1,]))
 
 
-model <- lm(log_Total_crimes~Personal_Income+Total_Population)
+model <- lm(log_Total_Crimes~Personal_Income+Total_Population+Number_of_Physicians+Personal_Income)
 
-model <- lm(log_Total_crimes~1)
+model <- lm(log_Total_Crimes~1)
 
 
 summary(model)
@@ -370,17 +374,60 @@ plot(model )
 
 par(mfrow=c(2,2))
 
-plot(log_Total_crimes,Personal_Income, lwd=4)
-plot(log_Total_crimes,log(Personal_Income) , lwd=4)
+plot(log_Total_Crimes,Personal_Income, lwd=4)
+plot(log_Total_Crimes,log(Personal_Income) , lwd=4)
 
 
-plot(log_Total_crimes,Total_Population, lwd=4)
-plot(log_Total_crimes,log(Total_Population), lwd=4)
+plot(log_Total_Crimes,Total_Population, lwd=4)
+plot(log_Total_Crimes,log(Total_Population), lwd=4)
 
 ```
 
 ```{r}
-# Model 2
 
+# each of the 16 models; no clue if theres like an easier way to do this but i just brute forced it
+# log transformations turned out to be the best for the extra 3 predictors
+
+model_4_1 <-
+
+model_4_2 <- lm(log_Total_Crimes ~ Population_18_to_34)
+
+model_4_3 <- lm(log_Total_Crimes ~ log(Total_Population))
+
+model_4_4 <- lm(log_Total_Crimes ~ log(Number_of_Physicians))
+
+model_4_5 <- lm(log_Total_Crimes ~ log(Personal_Income))
+
+model_4_6 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(new.data$Total_Population))
+
+model_4_7 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(new.data$Number_of_Physicians))
+
+model_4_8 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(new.data$Personal_Income))
+
+model_4_9 <- lm(log_Total_Crimes ~ log(Total_Population) + log(new.data$Number_of_Physicians))
+
+model_4_10 <- lm(log_Total_Crimes ~ log(Total_Population) + log(new.data$Personal_Income))
+
+model_4_11 <- lm(log_Total_Crimes ~ log(Number_of_Physicians) + log(Personal_Income))
+
+model_4_12 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(Total_Population) + log(Number_of_Physicians))
+
+model_4_13 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(Total_Population) + log(Personal_Income))
+
+model_4_14 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(Number_of_Physicians) + log(Personal_Income))
+
+model_4_15 <- lm(log_Total_Crimes ~ log(Total_Population) + log(Number_of_Physicians) + log(Personal_Income))
+
+model_4_16 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(Total_Population) + log(Number_of_Physicians) + log(Personal_Income))
+```
+
+```{r}
+
+# finding the values for the table for each model
+
+anova(model_4_2)
+summary(model_4_2)
+AIC(model_4_2)
+BIC(model_4_2)
 ```
 
