@@ -325,3 +325,62 @@ region4 |>
         geom_point() +
         theme_bw()
 ```
+
+# Question 4
+
+## 4.1 Multiple Linear Regression Analysis
+```{r}
+# Setting up data and choosing a region
+
+nrow(region3)
+head(region3)
+
+pairs(region3[,5:12], lwd=2)
+cor(region3[,5:12])
+```
+```{r}
+# Model 1
+
+new.data <- cbind(log(region3[,10]), region3[,9], region1[,5])
+new.data <-as.data.frame(new.data)
+
+colnames(new.data) <- c("log_Total_crimes", "Personal_Income", "Total_Population")
+
+pairs(new.data ,lwd=3)
+head(new.data )
+attach(new.data)
+cor(new.data)
+
+library(corrplot)
+
+corrplot(cor(new.data[-1,]))
+
+
+model <- lm(log_Total_crimes~Personal_Income+Total_Population)
+
+model <- lm(log_Total_crimes~1)
+
+
+summary(model)
+
+par(mfrow=c(2,2))
+
+plot(model )
+
+
+par(mfrow=c(2,2))
+
+plot(log_Total_crimes,Personal_Income, lwd=4)
+plot(log_Total_crimes,log(Personal_Income) , lwd=4)
+
+
+plot(log_Total_crimes,Total_Population, lwd=4)
+plot(log_Total_crimes,log(Total_Population), lwd=4)
+
+```
+
+```{r}
+# Model 2
+
+```
+
