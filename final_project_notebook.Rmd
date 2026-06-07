@@ -341,7 +341,6 @@ cor(region4[,5:12])
 
 ```{r}
 # log transformations turned out to be the best for the extra 3 predictors
-
 model_4_1 <- lm(LogY_i ~ 1, data = region4)
 
 model_4_2 <- lm(LogY_i ~ Population_18to34, data = region4)
@@ -374,16 +373,18 @@ model_4_15 <- lm(LogY_i ~ log(total_population) + log(Physicians) + log(personal
 
 model_4_16 <- lm(LogY_i ~ Population_18to34 + log(total_population) + log(Physicians) + log(personal_income), data = region4)
 
-list_of_16_models <- list(model_4_1, model_4_2, model_4_3, model_4_4, model_4_5, model_4_6, model_4_7, model_4_8, model_4_9, model_4_10, model_4_11, model_4_12, model_4_13, model_4_14, model_4_15, model_4_16)
+models <- list(model_4_1, model_4_2, model_4_3, model_4_4, model_4_5, model_4_6, model_4_7, model_4_8, model_4_9, model_4_10, model_4_11, model_4_12, model_4_13, model_4_14, model_4_15, model_4_16)
 ```
 
 ```{r}
+results <- data.frame(
+  model = 1:16,
+  r2      = sapply(models, function(m) summary(m)$r.squared),
+  adj_r2  = sapply(models, function(m) summary(m)$adj.r.squared),
+  AIC     = sapply(models, AIC),
+  BIC     = sapply(models, BIC)
+)
 
-# finding the values for the table for each model
-
-anova(model_4_2)
-summary(model_4_2)
-AIC(model_4_2)
-BIC(model_4_2)
+results
 ```
 
