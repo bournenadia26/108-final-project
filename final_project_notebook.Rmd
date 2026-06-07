@@ -382,26 +382,21 @@ p_full <- length(coef(model_4_16))
 MSE_full <- sum(residuals(model_4_16)^2) / (n - p_full)
 
 results <- data.frame(
-  variables = c("None",
-                "Population_18to34", "log(Total_Population)", "log(Physicians)", "log(Personal_Income)",
-                "18to34+logTotPop", "18to34+logPhys", "18to34+logIncome",
-                "logTotPop+logPhys", "logTotPop+logIncome", "logPhys+logIncome",
-                "18to34+logTotPop+logPhys", "18to34+logTotPop+logIncome", "18to34+logPhys+logIncome",
-                "logTotPop+logPhys+logIncome", "All four"),
-  p         = sapply(models, function(m) length(coef(m))),
-  SSE       = sapply(models, function(m) sum(residuals(m)^2)),
-  R2        = sapply(models, function(m) summary(m)$r.squared),
-  R2_adj    = sapply(models, function(m) summary(m)$adj.r.squared),
-  Cp        = sapply(models, function(m) {
-                SSE_p <- sum(residuals(m)^2)
-                p_p   <- length(coef(m))
-                SSE_p / MSE_full - (n - 2 * p_p)
-              }),
-  AIC       = sapply(models, AIC),
-  BIC       = sapply(models, BIC),
-  PRESS     = sapply(models, function(m) {
-                sum((residuals(m) / (1 - hatvalues(m)))^2)
-              })
+  variables = c("None", "Population_18to34", "log(Total_Population)", "log(Physicians)", "log(Personal_Income)", "18to34+logTotPop", "18to34+logPhys", "18to34+logIncome", "logTotPop+logPhys", "logTotPop+logIncome", "logPhys+logIncome", "18to34+logTotPop+logPhys", "18to34+logTotPop+logIncome", "18to34+logPhys+logIncome", "logTotPop+logPhys+logIncome", "All four"),
+  p = sapply(models, function(m) length(coef(m))),
+  SSE = sapply(models, function(m) sum(residuals(m)^2)),
+  R2 = sapply(models, function(m) summary(m)$r.squared),
+  R2_adj = sapply(models, function(m) summary(m)$adj.r.squared),
+  C_p = sapply(models, function(m) {
+               SSE_p <- sum(residuals(m)^2)
+               p_p   <- length(coef(m))
+               SSE_p / MSE_full - (n - 2 * p_p)
+               }),
+  AIC = sapply(models, AIC),
+  BIC = sapply(models, BIC),
+  PRESS = sapply(models, function(m) {
+                 sum((residuals(m) / (1 - hatvalues(m)))^2)
+                 })
 )
 
 results
