@@ -338,87 +338,43 @@ head(region4)
 pairs(region4[,5:12], lwd=2)
 cor(region4[,5:12])
 ```
-```{r}
-# Model 1
-
-data <- read.table("Demographic.txt")
-
-region4_data <- subset(data, data[,17] == 4)
-
-new.data <- cbind(log(region4_data[,10]), region4_data[,6], region4_data[,5], region4_data[,8], region4_data[,16])
-new.data <-as.data.frame(new.data)
-
-colnames(new.data) <- c("log_Total_Crimes", "Population_18_to_34", "Total_Population", "Number_of_Physicians", "Personal_Income")
-
-pairs(new.data ,lwd=3)
-head(new.data )
-attach(new.data)
-cor(new.data)
-
-library(corrplot)
-
-corrplot(cor(new.data[-1,]))
-
-
-model <- lm(log_Total_Crimes~Personal_Income+Total_Population+Number_of_Physicians+Personal_Income)
-
-model <- lm(log_Total_Crimes~1)
-
-
-summary(model)
-
-par(mfrow=c(2,2))
-
-plot(model )
-
-
-par(mfrow=c(2,2))
-
-plot(log_Total_Crimes,Personal_Income, lwd=4)
-plot(log_Total_Crimes,log(Personal_Income) , lwd=4)
-
-
-plot(log_Total_Crimes,Total_Population, lwd=4)
-plot(log_Total_Crimes,log(Total_Population), lwd=4)
-
-```
 
 ```{r}
-
-# each of the 16 models; no clue if theres like an easier way to do this but i just brute forced it
 # log transformations turned out to be the best for the extra 3 predictors
 
-model_4_1 <-
+model_4_1 <- lm(LogY_i ~ 1, data = region4)
 
-model_4_2 <- lm(log_Total_Crimes ~ Population_18_to_34)
+model_4_2 <- lm(LogY_i ~ Population_18to34, data = region4)
 
-model_4_3 <- lm(log_Total_Crimes ~ log(Total_Population))
+model_4_3 <- lm(LogY_i ~ log(total_population), data = region4)
 
-model_4_4 <- lm(log_Total_Crimes ~ log(Number_of_Physicians))
+model_4_4 <- lm(LogY_i ~ log(Physicians), data = region4)
 
-model_4_5 <- lm(log_Total_Crimes ~ log(Personal_Income))
+model_4_5 <- lm(LogY_i ~ log(personal_income), data = region4)
 
-model_4_6 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(new.data$Total_Population))
+model_4_6 <- lm(LogY_i ~ Population_18to34 + log(total_population), data = region4)
 
-model_4_7 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(new.data$Number_of_Physicians))
+model_4_7 <- lm(LogY_i ~ Population_18to34 + log(Physicians), data = region4)
 
-model_4_8 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(new.data$Personal_Income))
+model_4_8 <- lm(LogY_i ~ Population_18to34 + log(personal_income), data = region4)
 
-model_4_9 <- lm(log_Total_Crimes ~ log(Total_Population) + log(new.data$Number_of_Physicians))
+model_4_9 <- lm(LogY_i ~ log(total_population) + log(Physicians), data = region4)
 
-model_4_10 <- lm(log_Total_Crimes ~ log(Total_Population) + log(new.data$Personal_Income))
+model_4_10 <- lm(LogY_i ~ log(total_population) + log(personal_income), data = region4)
 
-model_4_11 <- lm(log_Total_Crimes ~ log(Number_of_Physicians) + log(Personal_Income))
+model_4_11 <- lm(LogY_i ~ log(Physicians) + log(personal_income), data = region4)
 
-model_4_12 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(Total_Population) + log(Number_of_Physicians))
+model_4_12 <- lm(LogY_i ~ Population_18to34 + log(total_population) + log(Physicians), data = region4)
 
-model_4_13 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(Total_Population) + log(Personal_Income))
+model_4_13 <- lm(LogY_i ~ Population_18to34 + log(total_population) + log(personal_income), data = region4)
 
-model_4_14 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(Number_of_Physicians) + log(Personal_Income))
+model_4_14 <- lm(LogY_i ~ Population_18to34 + log(Physicians) + log(personal_income), data = region4)
 
-model_4_15 <- lm(log_Total_Crimes ~ log(Total_Population) + log(Number_of_Physicians) + log(Personal_Income))
+model_4_15 <- lm(LogY_i ~ log(total_population) + log(Physicians) + log(personal_income), data = region4)
 
-model_4_16 <- lm(log_Total_Crimes ~ Population_18_to_34 + log(Total_Population) + log(Number_of_Physicians) + log(Personal_Income))
+model_4_16 <- lm(LogY_i ~ Population_18to34 + log(total_population) + log(Physicians) + log(personal_income), data = region4)
+
+list_of_16_models <- list(model_4_1, model_4_2, model_4_3, model_4_4, model_4_5, model_4_6, model_4_7, model_4_8, model_4_9, model_4_10, model_4_11, model_4_12, model_4_13, model_4_14, model_4_15, model_4_16)
 ```
 
 ```{r}
