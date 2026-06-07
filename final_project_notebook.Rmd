@@ -396,12 +396,18 @@ results <- data.frame(
   BIC = sapply(models, BIC),
   PRESS = sapply(models, function(m) {
                  sum((residuals(m) / (1 - hatvalues(m)))^2)
-                 })
+                 }),
+  F_pval = sapply(models, function(m) {
+                  f <- summary(m)$fstatistic
+                  if (is.null(f)) return(NA)  # null model has no F stat
+                  pf(f[1], f[2], f[3], lower.tail = FALSE)
+                  }),
+  sig_predictors = sapply(models, function(m) {
+                          coefs <- summary(m)$coefficients
+                          sum(coefs[-1, 4] < 0.05) # exclude intercept row, count p < 0.05
+                          })
 )
 
 results
-```
-```{r diagnotic}
-
 ```
 
