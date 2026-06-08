@@ -469,3 +469,14 @@ results
 **MODEL COMPARISON INTERPRETATION**
 
 A series of 16 multiple linear regression models were fitted to explain variation in the log-transformed response variable log(Yi). The models include different combinations of the four predictors. The table shows a clear improvement in model fit when moving the intercept model to models that include predictors. For example, the null model explains none of the variation (R^2 = 0, SSE = 88.01), and adds a single predictor that improves fitness, such as log(Total_Population) achieves R^2 = 0.954, reducing the SSE to about 4.08. This concludes that with additional predictors, improvements become smaller indicating diminishing returns.
+
+## 4.3 Residual Analysis
+
+```{r}
+plot(model_4_15)
+summary(model_4_15)
+```
+
+**INTERPRETATION**
+
+## 4.4 Conclusions
