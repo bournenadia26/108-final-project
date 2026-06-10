@@ -408,7 +408,7 @@ The R^2 value is 0.9619, meaning that the model explains 96.19% of the variation
 Points are still somewhat pushed to the left (heteroscedasticity) but overall not extremely severe. Points follow Q-Q quite closely, residuals appear approximately normally distributed. Lines are not heavily pulled in one direction, and no points exceed Cook's distance, so no notable influential points or outliers. Depending on how much you care about heteroscedasticity, assumptions are reasonably met.
 
 
-## 4.2 Model Comparison Using 2p−1 Models
+## 4.2 Model Comparison Using 2p-1 Models
 ```{r}
 # log transformations turned out to be the best for the extra 3 predictors
 model_4_1 <- lm(LogY_i ~ 1, data = region4)
