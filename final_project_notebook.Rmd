@@ -391,7 +391,7 @@ anova(model)
 
 **INTERPRETATION**
 
-
+Points are still somewhat pushed to the left (heteroscedasticity) but overall not extremely severe. Points follow Q-Q quite closely, residuals appear approximately normally distributed. Lines are not heavily pulled in one direction, and no points exceed Cook's distance, so no notable influential points or outliers. Depending on how much you care about heteroscedasticity, assumptions are reasonably met.
 
 
 ## 4.2 Model Comparison Using 2p−1 Models
@@ -478,5 +478,7 @@ summary(model_4_15)
 ```
 
 **INTERPRETATION**
+
+
 
 ## 4.4 Conclusions
