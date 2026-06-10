@@ -479,6 +479,7 @@ summary(model_4_15)
 
 **INTERPRETATION**
 
+Points are more randomly scattered than on the model with four predictors from earlier, which indicates a less heteroscedastic model. Again, points follow Q-Q line closely, residuals appear approximately normally distributed. Lines are not heavily pulled in one direction, and no points exceed Cook's distance, so no notable influential points or outliers. Assumptions are again reasonably met.
 
 
 ## 4.4 Conclusions
