@@ -391,6 +391,20 @@ anova(model)
 
 **INTERPRETATION**
 
+b0 = -4.796, b1 = 0.00443, b2 = 1.354, b3 = 0.276, b4 = -0.509
+
+The intercept b0 = -4.796 means that the expected number of serious crimes is equal to -4.796 when all other predictors (percent of population aged 18-34, total population, number of physicians, and personal income) are held constant at 0. However, this is not a practical interpretation as there would be no serious crimes if there was no population and a negative number of crimes does not make sense. The standard error is 0.766, suggesting that the estimate is relatively precise since it is relatively small compared to the estimated coefficient.
+
+The coefficient b1 = 0.00443 means that for every 1% increase in the percentage of the population aged 18-34, the total number of serious crimes is expected to increase by 0.00443, holding the other predictors constant. The standard error is 0.0085, suggesting that the estimate is very imprecise and may vary drastically based on other samples since it is extremely large compared to the estimated coefficient.
+
+The coefficient b2 = 1.354 means that for every 1 unit increase in the log of the total population, we expect the total number of serious crimes to increase by 1.354, holding all other predictors constant. The standard error is 0.143, suggesting that the estimate is relatively precise since it is relatively small compared to the estimated coefficient.
+
+The coefficient b3 = 0.276 means that for every 1 unit increase in the log of the number of physicians, we expect the total number of serious crimes to increase by 0.276, holding all other predictors constant. The standard error is 0.077, suggesting that the estimate is relatively precise since it is relatively small compared to the estimated coefficient.
+
+The coefficient b2 = -0.509 means that for every 1 unit increase in the log of the total personal income, we expect the total number of serious crimes to decrease by 0.509, holding all other predictors constant. The standard error is 0.158, suggesting that the estimate is relatively precise since it is relatively small compared to the estimated coefficient.
+
+The R^2 value is 0.9619, meaning that the model explains 96.19% of the variation in the predictors (percent of population aged 18-34, log(total population), log(number of physicians), and log(personal income)).
+
 Points are still somewhat pushed to the left (heteroscedasticity) but overall not extremely severe. Points follow Q-Q quite closely, residuals appear approximately normally distributed. Lines are not heavily pulled in one direction, and no points exceed Cook's distance, so no notable influential points or outliers. Depending on how much you care about heteroscedasticity, assumptions are reasonably met.
 
 
@@ -479,7 +493,7 @@ summary(model_4_15)
 
 **INTERPRETATION**
 
-Points are more randomly scattered than on the model with four predictors from earlier, which indicates a less heteroscedastic model. Again, points follow Q-Q line closely, residuals appear approximately normally distributed. Lines are not heavily pulled in one direction, and no points exceed Cook's distance, so no notable influential points or outliers. Assumptions are again reasonably met.
+We decided to select the model which includes total polulation, number of physicians, and personal income as its predictors. Points are more randomly scattered on this model than on the model with four predictors from earlier, which indicates a less heteroscedastic model. Again, points follow Q-Q line closely, residuals appear approximately normally distributed. Lines are not heavily pulled in one direction, and no points exceed Cook's distance, so no notable influential points or outliers. Assumptions are again reasonably met.
 
 
 ## 4.4 Conclusions
